@@ -69,6 +69,14 @@ channel.join()
 
 var sNum = 1
 var ts_array = [];
+var transCountList = [];
+var blockNumList = [];
+blockNumList[0] = 0;
+transCountList[0] = 0;
+var nonceList = [];
+nonceList[0] = 0;
+
+
 channel.on('mining', msg => {
   // window.alert(msg.height)
   var blockHeight=msg.height
@@ -81,6 +89,11 @@ channel.on('mining', msg => {
   var prev_blockHash = msg.prev_blockHash
   var minedBy = msg.minedBy
   var nonce = msg.nonce
+
+  var trans = msg.transactions
+  
+  console.log(trans)
+  window.alert(trans)
 
   var comments = "New Block"
 
@@ -116,7 +129,7 @@ channel.on('mining', msg => {
   // window.alert(ts_array.length)
   if(parseInt(blockHeight) == ts_array.length){
     if(timeS > ts_array[parseInt(blockHeight)-1]){
-      comments = "Invalid Block"
+      comments = "Discarded Block"
     }
     else{
       ts_array[parseInt(blockHeight)-1] = timeS
@@ -125,12 +138,60 @@ channel.on('mining', msg => {
   }
   else{
     ts_array[parseInt(blockHeight)-1] = timeS
+      transCountList[parseInt(blockHeight)] = parseInt(num_trans)+transCountList[transCountList.length-1]
+      blockNumList[parseInt(blockHeight)] = parseInt(blockHeight)
+      nonceList[parseInt(blockHeight)] = parseInt(nonce)
+    // window.alert(transCountList)
   }
   
   sNum = sNum+1
   cell9.innerHTML=comments
 
   cell10.innerHTML=nonce
+
+  var mynonceChart = new Chart(nonceChart, {
+    type: 'line',
+    data: {
+      labels: blockNumList,
+      text: "Nunber of blocks",
+      datasets: [{ 
+          data: nonceList,
+          label: "Nonce",
+          borderColor: "#3e95cd",
+          fill: false
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Nonce after Each Block'
+      },
+      responsive:true,
+    }
+  })
+
+  var mytransactionChart = new Chart(transactionChart, {
+    type: 'line',
+    data: {
+      labels: blockNumList,
+      text: "Nunber of blocks",
+      datasets: [{ 
+          data: transCountList,
+          label: "Number of transactions",
+          borderColor: "#3e95cd",
+          fill: false
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Number of Successful Transactions after Every Block'
+      },
+      responsive:true,
+    }
+  })
   
 })
 //window.createSocket = createSocket;

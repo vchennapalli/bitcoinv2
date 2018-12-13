@@ -39,6 +39,15 @@
   </table>
   </div>
   </div>
+
+  <div class="col-md-6">
+    <canvas id="transactionChart" width="500" height="300"></canvas>
+  </div>
+  <div class = "col-md-6">
+    <canvas id="nonceChart" width="500" height="300"></canvas>
+  </div>
+
+
 <%# <script>
   $("#confirm").click(function(){
     

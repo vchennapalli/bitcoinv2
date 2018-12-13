@@ -96,6 +96,7 @@ defmodule Block do
 
       IO.puts "Block mined by #{my_address} with #{height}"
       
+      trans = GetTransactions.getTrans(block.transactions,[])
       
       mr = block.header.merkle_root
       [cblock] = Enum.take(blockchain, -1)
@@ -110,7 +111,8 @@ defmodule Block do
         num_transactions: block.num_transactions,
         blockHash: chash,
         minedBy: my_address,
-        nonce: block.header.nonce
+        nonce: block.header.nonce,
+        transactions: trans
   
       }
       
@@ -177,6 +179,8 @@ defmodule Block do
 
       [cblock] = Enum.take(blockchain, -1)
       chash = calculate_block_hash(cblock[:header])
+
+      trans = GetTransactions.getTrans(block.transactions,[])
       Bitcoinv2Web.Endpoint.broadcast "miningChannel:" , "mining", %{
         
         bits: block.header.bits,
@@ -188,7 +192,8 @@ defmodule Block do
         num_transactions: block.num_transactions,
         blockHash: chash ,
         minedBy: my_address,
-        nonce: nonce
+        nonce: nonce,
+        transactions: trans
   
       }
       {state, block, height}
