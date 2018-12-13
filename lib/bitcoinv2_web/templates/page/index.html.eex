@@ -40,6 +40,24 @@
   </div>
   </div>
 
+  <div class="span3">
+    <div class="table-responsive">
+     <table class="table table-striped" id="transtable">
+      <thead>
+        <tr>
+          <th scope="col">Sender Address</th>
+          <th scope="col">Receiver Address</th>
+          <th scope="col">Transaction value</th>
+          <th scope="col">Change</th>
+          <th scope="col">Transaction Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody> 
+    </table>
+    </div>
+  </div>
+
   <div class="col-md-6">
     <canvas id="transactionChart" width="500" height="300"></canvas>
   </div>

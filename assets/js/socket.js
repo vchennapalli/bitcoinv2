@@ -90,13 +90,9 @@ channel.on('mining', msg => {
   var minedBy = msg.minedBy
   var nonce = msg.nonce
 
-  var trans = msg.transactions
-  
-  console.log(trans)
-  window.alert(trans)
+  var trans_list = msg.transactions
 
   var comments = "New Block"
-
   
   var table=document.getElementById("blocktable")
   var row=table.insertRow(1)
@@ -145,9 +141,33 @@ channel.on('mining', msg => {
   }
   
   sNum = sNum+1
+  //Adding status of block and nonce
   cell9.innerHTML=comments
-
   cell10.innerHTML=nonce
+
+  console.log(trans_list)
+  //Transaction table insertions
+  
+  var table=document.getElementById("transtable")
+  // var row=table.insertRow(1)
+
+  // var cell0=row.insertCell(0)
+  // var cell1=row.insertCell(1)
+  // var cell2=row.insertCell(2)
+  // var cell3=row.insertCell(3)
+  // var cell4=row.insertCell(4)
+  
+  // if(trans_list.length == 1){
+
+  // }
+  // else{
+
+  // }
+
+    
+  // cell0.innerHTML= sNum
+  // cell3.innerHTML = bits
+
 
   var mynonceChart = new Chart(nonceChart, {
     type: 'line',
