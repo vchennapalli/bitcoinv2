@@ -5,16 +5,21 @@
 
 
   <div class="form-group">
-    <label for="exampleInputEmail1">Enter number of nodes:</label>
+    <div class = "col-sm-6">
+    <label for="exampleInputEmail1">Enter number of nodes:</label> </div>
+    <div class = "col-sm-3"> <label for="bitcoins">Total Bitcoins Mined:</label> </div>
+    <div class = "col-sm-3"> <label for="bitcoins_transacted">Total Bitcoins transacted:</label> </div>
    <br>
-    <div class="col-sm-9"><input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter number"></div>
-    <button class="btn btn-sm btn-primary btn-signin" id="loginButton">Submit</button>
-    
+    <div class="col-sm-3"><input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter number"></div>
+    <div class = "col-sm-3"><button class="btn btn-sm btn-primary btn-signin" id="loginButton">Submit</button></div>
+    <div class = "col-sm-3"><p id="bitcoins"></p> </div>
+    <div class = "col-sm-3"><p id="bitcoins_transacted"></p> </div>
+    <br>
   </div>
   
-<br>
-  <label for="blocktable"> Block Details: </label>
-  
+  <br>
+
+  <label> Block Details: </label>
   <div class="span3">
   <div class="table-responsive">
   <table class="table table-striped" id="blocktable">
@@ -47,6 +52,7 @@
      <table class="table table-striped" id="transtable">
       <thead>
         <tr>
+          <th scope="col">#</th>
           <th scope="col">Sender Address</th>
           <th scope="col">Receiver Address</th>
           <th scope="col">Transaction value</th>

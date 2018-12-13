@@ -68,6 +68,7 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 var sNum = 1
+var tNum = 1
 var ts_array = [];
 var transCountList = [];
 var blockNumList = [];
@@ -75,7 +76,10 @@ blockNumList[0] = 0;
 transCountList[0] = 0;
 var nonceList = [];
 nonceList[0] = 0;
-
+var bitcoins = 0
+var bitcoins_transacted = 0
+document.getElementById("bitcoins").innerHTML = bitcoins
+document.getElementById("bitcoins_transacted").innerHTML = bitcoins_transacted
 
 channel.on('mining', msg => {
   // window.alert(msg.height)
@@ -142,6 +146,74 @@ channel.on('mining', msg => {
         blockNumList[parseInt(blockHeight)] = parseInt(blockHeight)
         nonceList[parseInt(blockHeight)] = parseInt(nonce)
       // window.alert(transCountList)
+      //Transaction details are only sent if the block is a new Block
+      
+      //Updating Total number of botcoins
+      bitcoins = bitcoins+50
+      document.getElementById("bitcoins").innerHTML = bitcoins
+
+      //variables for transactions
+      var senderAdd;
+      var receiverAdd;
+      var transVal;
+      var change_trans;
+      var trans_fee;
+      var status_trans;
+
+      // console.log(trans_list)
+      //for genesis block
+      if(trans_list.length == 1){
+        status_trans = "Coinbase Transaction"
+        senderAdd = "Coinbase"
+        receiverAdd = trans_list[0].script_pub_key
+        transVal = parseInt(trans_list[0].value)/10000000
+        trans_fee = 0
+        change_trans = 0
+        addTrans(tNum, senderAdd,receiverAdd,transVal,change_trans,trans_fee,status_trans)
+
+        // window.alert(transVal)
+        }
+        //for other blocks
+      else{
+        status_trans = "Coinbase and Transfer Fee"
+        senderAdd = "Coinbase"
+        receiverAdd = trans_list[0].script_pub_key
+        transVal = parseInt(trans_list[0].value)/10000000
+        trans_fee = transVal-50
+        change_trans = 0
+        addTrans(tNum, senderAdd,receiverAdd,transVal,change_trans,trans_fee,status_trans)
+
+        //Updating the value of total bitcoins transacted
+        bitcoins_transacted = bitcoins_transacted+trans_fee
+        document.getElementById("bitcoins_transacted").innerHTML = bitcoins_transacted
+        
+        for (let i = 1; i < trans_list.length; i++) {
+          status_trans = "Transaction"
+          senderAdd = trans_list[i].script_pub_key
+          transVal =  parseInt(trans_list[i].value)/10000000
+          i++
+          receiverAdd = trans_list[i].script_pub_key
+          change_trans = parseInt(trans_list[i].value)/10000000
+          trans_fee = ((change_trans+transVal)*2)/98
+          addTrans(tNum, senderAdd,receiverAdd,transVal,change_trans,trans_fee,status_trans)
+
+          //updating bitcoins transacted
+          bitcoins_transacted = bitcoins_transacted+transVal
+          document.getElementById("bitcoins_transacted").innerHTML = bitcoins_transacted
+        }
+      }
+
+    
+      // cell0.innerHTML= tNum
+      // cell1.innerHTML = senderAdd
+      // cell2.innerHTML = receiverAdd
+      // cell3.innerHTML = transVal
+      // cell4.innerHTML = change_trans
+      // cell5.innerHTML = trans_fee
+      // cell6.innerHTML = status_trans
+
+      tNum = tNum+1
+
     }
   
     sNum = sNum+1
@@ -150,30 +222,28 @@ channel.on('mining', msg => {
     cell10.innerHTML=nonce
 
     // console.log(trans_list)
-    //Transaction table insertions
+   //function for inserting element to the table
   
-    // var table=document.getElementById("transtable")
-    // var row=table.insertRow(1)
+   function addTrans(tNum, senderAdd,receiverAdd,transVal,change_trans,trans_fee,status_trans) {
+      var table=document.getElementById("transtable")
+      var row=table.insertRow(1)
 
-    // var cell0=row.insertCell(0)
-    // var cell1=row.insertCell(1)
-    // var cell2=row.insertCell(2)
-    // var cell3=row.insertCell(3)
-    // var cell4=row.insertCell(4)
-    // var cell5=row.insertCell(5)
+      var cell0=row.insertCell(0)
+      var cell1=row.insertCell(1)
+      var cell2=row.insertCell(2)
+      var cell3=row.insertCell(3)
+      var cell4=row.insertCell(4)
+      var cell5=row.insertCell(5)
+      var cell6=row.insertCell(6)
 
-    // var trans_status 
-    // if(trans_list.length == 1){
-
-    // }
-    // else{
-
-    // }
-
-    
-    // cell0.innerHTML= sNum
-    // cell3.innerHTML = bits
-
+      cell0.innerHTML= tNum
+      cell1.innerHTML = senderAdd
+      cell2.innerHTML = receiverAdd
+      cell3.innerHTML = transVal
+      cell4.innerHTML = change_trans
+      cell5.innerHTML = trans_fee
+      cell6.innerHTML = status_trans
+    }
 
     var mynonceChart = new Chart(nonceChart, {
      type: 'line',
