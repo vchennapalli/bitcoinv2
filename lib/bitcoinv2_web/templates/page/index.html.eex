@@ -1,0 +1,80 @@
+<%# <div class="jumbotron">
+  <h2>Welcome to Bitcoin Explorer</h2>
+  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+</div> %>
+
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Enter number of nodes:</label>
+   <br>
+    <div class="col-sm-9"><input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter number"></div>
+    <button class="btn btn-sm btn-primary btn-signin" id="loginButton">Submit</button>
+    
+  </div>
+  
+<br>
+  <label for="blocktable"> Block Details: </label>
+  
+  <div class="span3">
+  <div class="table-responsive">
+  <table class="table table-striped" id="blocktable">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Height</th>
+      <th scope="col">Merkel Root</th>
+      <th scope="col">Bits</th>
+      
+      <th scope="col">Time Stamp</th>
+      <th scope="col">Number of Transactions</th>
+      <th scope="col">Mined By</th>
+      <th scope="col">Block Hash</th>
+      <th scope="col">Previous Hash</th>
+      <th scope="col">Status</th>
+      <th scope="col">Nonce</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody> 
+  </table>
+  </div>
+  </div>
+<%# <script>
+  $("#confirm").click(function(){
+    
+    window.location.href = "dashboard/"+$("#num").val()
+  });
+
+</script> %>
+
+<%# <div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Resources</h4>
+    <ul>
+      <li>
+        <a href="http://phoenixframework.org/docs/overview">Guides</a>
+      </li>
+      <li>
+        <a href="https://hexdocs.pm/phoenix">Docs</a>
+      </li>
+      <li>
+        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
+    <h4>Help</h4>
+    <ul>
+      <li>
+        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
+      </li>
+      <li>
+        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
+      </li>
+    </ul>
+  </div>
+</div> %>

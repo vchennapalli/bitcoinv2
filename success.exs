@@ -1,0 +1,1 @@
+Bitcoin.main(100)

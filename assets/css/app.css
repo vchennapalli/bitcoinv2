@@ -1,0 +1,24 @@
+/* This file is for your main application css. */
+body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+  }
+  
+  .theme-dropdown .dropdown-menu {
+    position: static;
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .theme-showcase > p > .btn {
+    margin: 5px 0;
+  }
+  
+  .theme-showcase .navbar .container {
+    width: auto;
+  }
+  
+  .span3 {  
+    max-height: 300px !important;
+    overflow: scroll;
+}
