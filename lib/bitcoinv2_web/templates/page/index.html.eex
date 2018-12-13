@@ -40,6 +40,8 @@
   </div>
   </div>
 
+  <br>
+  <label for="transtable"> Transaction Details: </label>
   <div class="span3">
     <div class="table-responsive">
      <table class="table table-striped" id="transtable">
@@ -50,6 +52,7 @@
           <th scope="col">Transaction value</th>
           <th scope="col">Change</th>
           <th scope="col">Transaction Fee</th>
+          <th scope="col">Comments</th>
         </tr>
       </thead>
       <tbody>
@@ -58,6 +61,7 @@
     </div>
   </div>
 
+  <br/>
   <div class="col-md-6">
     <canvas id="transactionChart" width="500" height="300"></canvas>
   </div>

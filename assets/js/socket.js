@@ -94,127 +94,133 @@ channel.on('mining', msg => {
 
   var comments = "New Block"
   
-  var table=document.getElementById("blocktable")
-  var row=table.insertRow(1)
+  if(parseInt(blockHeight) < ts_array.length){
+    console.log("discarded")
+  }
+  else{
+    var table=document.getElementById("blocktable")
+    var row=table.insertRow(1)
 
-  var cell0=row.insertCell(0)
-  var cell1=row.insertCell(1)
-  var cell2=row.insertCell(2)
-  var cell3=row.insertCell(3)
-  var cell4=row.insertCell(4)
-  var cell5=row.insertCell(5)
-  var cell6=row.insertCell(6)
-  var cell7=row.insertCell(7)
-  var cell8=row.insertCell(8)
-  var cell9=row.insertCell(9)
-  var cell10=row.insertCell(10)
+    var cell0=row.insertCell(0)
+    var cell1=row.insertCell(1)
+    var cell2=row.insertCell(2)
+    var cell3=row.insertCell(3)
+    var cell4=row.insertCell(4)
+    var cell5=row.insertCell(5)
+    var cell6=row.insertCell(6)
+    var cell7=row.insertCell(7)
+    var cell8=row.insertCell(8)
+    var cell9=row.insertCell(9)
+    var cell10=row.insertCell(10)
   
-  cell0.innerHTML= sNum
-  cell3.innerHTML = bits
-  cell2.innerHTML=merkle_root.toLowerCase()
-  cell1.innerHTML=blockHeight
+    cell0.innerHTML= sNum
+    cell3.innerHTML = bits
+    cell2.innerHTML=merkle_root.toLowerCase()
+    cell1.innerHTML=blockHeight
 
-  cell4.innerHTML=timeS
-  cell5.innerHTML=num_trans
-  cell6.innerHTML=minedBy
-  cell7.innerHTML=blockHash
-  cell8.innerHTML=prev_blockHash
+    cell4.innerHTML=timeS
+    cell5.innerHTML=num_trans
+    cell6.innerHTML=minedBy
+    cell7.innerHTML=blockHash
+    cell8.innerHTML=prev_blockHash
 
-  //Updating block comments
-  // window.alert(blockHeight)
-  // window.alert(ts_array.length)
-  if(parseInt(blockHeight) == ts_array.length){
-    if(timeS > ts_array[parseInt(blockHeight)-1]){
-      comments = "Discarded Block"
+    //Updating block comments
+    // window.alert(blockHeight)
+    // window.alert(ts_array.length)
+    if(parseInt(blockHeight) == ts_array.length){
+     if(timeS > ts_array[parseInt(blockHeight)-1]){
+        comments = "Discarded Block"
+      }
+      else{
+        ts_array[parseInt(blockHeight)-1] = timeS
+        comments = "This block replaces other blocks with same height"
+     }
     }
     else{
       ts_array[parseInt(blockHeight)-1] = timeS
-      comments = "This block replaces other blocks with same height"
+        transCountList[parseInt(blockHeight)] = parseInt(num_trans)+transCountList[transCountList.length-1]
+        blockNumList[parseInt(blockHeight)] = parseInt(blockHeight)
+        nonceList[parseInt(blockHeight)] = parseInt(nonce)
+      // window.alert(transCountList)
     }
-  }
-  else{
-    ts_array[parseInt(blockHeight)-1] = timeS
-      transCountList[parseInt(blockHeight)] = parseInt(num_trans)+transCountList[transCountList.length-1]
-      blockNumList[parseInt(blockHeight)] = parseInt(blockHeight)
-      nonceList[parseInt(blockHeight)] = parseInt(nonce)
-    // window.alert(transCountList)
-  }
   
-  sNum = sNum+1
-  //Adding status of block and nonce
-  cell9.innerHTML=comments
-  cell10.innerHTML=nonce
+    sNum = sNum+1
+    //Adding status of block and nonce
+    cell9.innerHTML=comments
+    cell10.innerHTML=nonce
 
-  console.log(trans_list)
-  //Transaction table insertions
+    // console.log(trans_list)
+    //Transaction table insertions
   
-  var table=document.getElementById("transtable")
-  // var row=table.insertRow(1)
+    // var table=document.getElementById("transtable")
+    // var row=table.insertRow(1)
 
-  // var cell0=row.insertCell(0)
-  // var cell1=row.insertCell(1)
-  // var cell2=row.insertCell(2)
-  // var cell3=row.insertCell(3)
-  // var cell4=row.insertCell(4)
-  
-  // if(trans_list.length == 1){
+    // var cell0=row.insertCell(0)
+    // var cell1=row.insertCell(1)
+    // var cell2=row.insertCell(2)
+    // var cell3=row.insertCell(3)
+    // var cell4=row.insertCell(4)
+    // var cell5=row.insertCell(5)
 
-  // }
-  // else{
+    // var trans_status 
+    // if(trans_list.length == 1){
 
-  // }
+    // }
+    // else{
+
+    // }
 
     
-  // cell0.innerHTML= sNum
-  // cell3.innerHTML = bits
+    // cell0.innerHTML= sNum
+    // cell3.innerHTML = bits
 
 
-  var mynonceChart = new Chart(nonceChart, {
-    type: 'line',
-    data: {
-      labels: blockNumList,
-      text: "Nunber of blocks",
-      datasets: [{ 
-          data: nonceList,
-          label: "Nonce",
-          borderColor: "#3e95cd",
-          fill: false
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Nonce after Each Block'
+    var mynonceChart = new Chart(nonceChart, {
+     type: 'line',
+      data: {
+        labels: blockNumList,
+        text: "Nunber of blocks",
+        datasets: [{ 
+            data: nonceList,
+            label: "Nonce",
+            borderColor: "#3e95cd",
+            fill: false
+          }
+        ]
       },
-      responsive:true,
-    }
-  })
+      options: {
+        title: {
+          display: true,
+          text: 'Nonce after Each Block'
+        },
+        responsive:true,
+      }
+   })
 
-  var mytransactionChart = new Chart(transactionChart, {
-    type: 'line',
-    data: {
-      labels: blockNumList,
-      text: "Nunber of blocks",
-      datasets: [{ 
-          data: transCountList,
-          label: "Number of transactions",
-          borderColor: "#3e95cd",
-          fill: false
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Number of Successful Transactions after Every Block'
+    var mytransactionChart = new Chart(transactionChart, {
+     type: 'line',
+      data: {
+        labels: blockNumList,
+        text: "Nunber of blocks",
+        datasets: [{ 
+            data: transCountList,
+            label: "Number of transactions",
+            borderColor: "#3e95cd",
+            fill: false
+          }
+       ]
       },
-      responsive:true,
-    }
-  })
+      options: {
+        title: {
+         display: true,
+         text: 'Number of Successful Transactions after Every Block'
+        },
+        responsive:true,
+      }
+    })
   
+    //window.createSocket = createSocket;
+  }
 })
-//window.createSocket = createSocket;
-
 
 export default socket
