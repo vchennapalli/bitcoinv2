@@ -58,8 +58,9 @@ socket.connect()
 let channel = socket.channel(`miningChannel:`,{})
 document.getElementById("loginButton").onclick = function(){
   let num = parseInt($("#exampleInputEmail1").val());
+  let bnum = parseFloat($("#blockNum").val());
   //window.alert(typeof(num));
-  channel.push("mining", {num: num});
+  channel.push("mining", {num: num,bnum: bnum});
 };
 
   
@@ -247,15 +248,15 @@ channel.on('mining', msg => {
     }
 
     var mynonceChart = new Chart(nonceChart, {
-     type: 'line',
+     type: 'bar',
       data: {
         labels: blockNumList,
         text: "Nunber of blocks",
         datasets: [{ 
             data: nonceList,
             label: "Nonce",
-            borderColor: "#3e95cd",
-            fill: false
+            backgroundColor: "#2229e8",
+            fill: true
           }
         ]
       },

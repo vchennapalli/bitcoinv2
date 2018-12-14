@@ -6,9 +6,9 @@ defmodule Bitcoin do
   @doc """
   main function
   """
-  def main(num_users) do
+  def main(num_users,max_blocks) do
     #num_users = 100
-    max_blocks = 10
+    # max_blocks = 10
     {:ok, agent_pid} = Neighbors.start_link(nil)
     {:ok, super_pid} = start_link(num_users - 1, max_blocks, agent_pid)
     # [child|_children] = Supervisor.which_children(super_pid)

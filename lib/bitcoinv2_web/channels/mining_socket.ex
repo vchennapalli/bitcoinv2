@@ -5,9 +5,9 @@ defmodule Bitcoinv2Web.MiningSocket do
         {:ok, %{},socket}
     end
 
-    def handle_in("mining",%{"num" => num}, socket) do
+    def handle_in("mining",%{"num" => num, "bnum" => bnum}, socket) do
         # IO.puts "+++++++++++++++++++++++++"
-        Bitcoin.main(num)
+        Bitcoin.main(num,bnum)
         {:noreply, socket}
       end
 

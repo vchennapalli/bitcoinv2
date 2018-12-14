@@ -5,13 +5,16 @@
 
 
   <div class="form-group">
-    <div class = "col-sm-6">
-    <label for="exampleInputEmail1">Enter number of nodes:</label> </div>
+    <div class = "col-sm-2">
+    <label for="exampleInputEmail1">Enter no. of nodes (2-100):</label> </div>
+    <div class = "col-sm-4">
+    <label for="blockNum">Enter no. of blocks (5-20):</label> </div>
     <div class = "col-sm-3"> <label for="bitcoins">Total Bitcoins Mined:</label> </div>
     <div class = "col-sm-3"> <label for="bitcoins_transacted">Total Bitcoins transacted:</label> </div>
    <br>
-    <div class="col-sm-3"><input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter number"></div>
-    <div class = "col-sm-3"><button class="btn btn-sm btn-primary btn-signin" id="loginButton">Submit</button></div>
+    <div class="col-sm-2"><input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter number"></div>
+    <div class="col-sm-2"><input type="number" class="form-control" id="blockNum" placeholder="Enter number"></div>
+    <div class = "col-sm-2"><button class="btn btn-sm btn-primary btn-signin" id="loginButton">Submit</button></div>
     <div class = "col-sm-3"><p id="bitcoins"></p> </div>
     <div class = "col-sm-3"><p id="bitcoins_transacted"></p> </div>
     <br>
@@ -68,6 +71,7 @@
   </div>
 
   <br/>
+  
   <div class = "col-md-6">
     <canvas id="timeChart" width="500" height="300"></canvas>
   </div>
@@ -75,9 +79,13 @@
     <canvas id="nonceChart" width="500" height="300"></canvas>
   </div>
   <br>
-  <div class="col-md-6">
+  <br>
+  <div class="col-md-6" >
     <canvas id="transactionChart" width="500" height="300"></canvas>
   </div>
+  <div class = "col-md-6">
+  </div>
+  
   
 
 <%# <script>
