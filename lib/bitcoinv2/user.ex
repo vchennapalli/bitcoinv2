@@ -107,11 +107,13 @@ defmodule User do
         end_time = :os.system_time(:micro_seconds)
         start_time = state[:mining_begin_time]
 
+        {new_state, block, height} = B.add_to_blockchain(state)
+
         Bitcoinv2Web.Endpoint.broadcast "miningChannel:","mining:time",%{
-          time: end_time - start_time
+          time: end_time - start_time,
+          height: height
         }
 
-        {new_state, block, height} = B.add_to_blockchain(state)
         new_state = Map.put(new_state, :continue_mining, false)
         agent_pid = Map.get(new_state, :agent_pid)
         neighbors = Map.get(new_state, :public_addresses)

@@ -159,9 +159,10 @@ defmodule Block do
       start_time = :os.system_time(:micro_seconds)
       nonce = M.mine(header)
       end_time = :os.system_time(:micro_seconds)
-      
+
       Bitcoinv2Web.Endpoint.broadcast "miningChannel:","mining:time",%{
-        time: end_time - start_time
+        time: end_time - start_time,
+        height: 1
       }
       # hash = "#{header[:version]}#{header[:previous_block_hash]}#{header[:merkle_root]}#{header[:timestamp]}#{header[:nonce]}" |> H.double_hash(:sha256) |> Base.encode16
       # IO.inspect hash
