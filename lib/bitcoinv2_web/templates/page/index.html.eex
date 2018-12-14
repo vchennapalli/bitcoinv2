@@ -46,13 +46,13 @@
   </div>
 
   <br>
-  <label for="transtable"> Transaction Details: </label>
+  <label for="transtable">Transaction Details: </label>
   <div class="span3">
     <div class="table-responsive">
      <table class="table table-striped" id="transtable">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Block Height</th>
           <th scope="col">Sender Address</th>
           <th scope="col">Receiver Address</th>
           <th scope="col">Transaction value</th>
@@ -68,13 +68,17 @@
   </div>
 
   <br/>
-  <div class="col-md-6">
-    <canvas id="transactionChart" width="500" height="300"></canvas>
+  <div class = "col-md-6">
+    <canvas id="timeChart" width="500" height="300"></canvas>
   </div>
   <div class = "col-md-6">
     <canvas id="nonceChart" width="500" height="300"></canvas>
   </div>
-
+  <br>
+  <div class="col-md-6">
+    <canvas id="transactionChart" width="500" height="300"></canvas>
+  </div>
+  
 
 <%# <script>
   $("#confirm").click(function(){

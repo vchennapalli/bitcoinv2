@@ -11,5 +11,11 @@ defmodule Bitcoinv2Web.MiningSocket do
         {:noreply, socket}
       end
 
+    def handle_in("mining:time",%{"num" => num}, socket) do
+        IO.puts "+++++++++++++++++++++++++"
+       #Bitcoin.main(num)
+       {:noreply, socket}
+    end
+
 
 end

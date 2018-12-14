@@ -132,13 +132,14 @@ channel.on('mining', msg => {
     // window.alert(blockHeight)
     // window.alert(ts_array.length)
     if(parseInt(blockHeight) == ts_array.length){
-     if(timeS > ts_array[parseInt(blockHeight)-1]){
-        comments = "Discarded Block"
-      }
-      else{
-        ts_array[parseInt(blockHeight)-1] = timeS
-        comments = "This block replaces other blocks with same height"
-     }
+    //  if(timeS > ts_array[parseInt(blockHeight)-1]){
+    //     comments = "Discarded Block"
+    //   }
+    //   else{
+    //     ts_array[parseInt(blockHeight)-1] = timeS
+    //     comments = "This block replaces other blocks with same height"
+    //  }
+      comments = "Discard Block"
     }
     else{
       ts_array[parseInt(blockHeight)-1] = timeS
@@ -291,6 +292,56 @@ channel.on('mining', msg => {
   
     //window.createSocket = createSocket;
   }
+})
+
+//Timing graphs
+var time_height_list = []
+var time_list = []
+
+time_height_list[0]=0
+time_list[0] = 0
+
+var time_var
+var time_height
+
+channel.on("mining:time", payload => {
+  time_var = parseInt(payload.time)/1000000
+  time_height = payload.height
+
+  if(time_height == time_height_list.length){
+
+    //Adding two height and time to their respecetive lists
+    time_height_list[time_height] = time_height
+    time_list[time_height] = time_var
+
+
+    //Js code for the time graph
+    var mytimeChart = new Chart(timeChart, {
+      type: 'bar',
+       data: {
+         labels: time_height_list,
+         text: "Block Numbers",
+         datasets: [{ 
+             data: time_list,
+             label: "Time Taken to Mine per Block",
+             backgroundColor: "#f47442",
+             fill: true
+           }
+        ]
+       },
+       options: {
+         title: {
+          display: true,
+          text: 'Time to mine a block in seconds'
+         },
+         responsive:true,
+       }
+     })
+  }
+  else{
+    
+  }
+
 })
 
 export default socket
