@@ -10,11 +10,11 @@
     <div class = "col-sm-4">
     <label for="blockNum">Enter no. of blocks (5-20):</label> </div>
     <div class = "col-sm-3"> <label for="bitcoins">Total Bitcoins Mined:</label> </div>
-    <div class = "col-sm-3"> <label for="bitcoins_transacted">Total Bitcoins transacted:</label> </div>
+    <div class = "col-sm-3"> <label for="bitcoins_transacted">Total Bitcoins Transacted:</label> </div>
    <br>
     <div class="col-sm-2"><input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter number"></div>
     <div class="col-sm-2"><input type="number" class="form-control" id="blockNum" placeholder="Enter number"></div>
-    <div class = "col-sm-2"><button class="btn btn-sm btn-primary btn-signin" id="loginButton">Submit</button></div>
+    <div class = "col-sm-2"><button class="btn btn-sm btn-primary btn-signin" id="loginButton">Begin Simulation</button></div>
     <div class = "col-sm-3"><p id="bitcoins"></p> </div>
     <div class = "col-sm-3"><p id="bitcoins_transacted"></p> </div>
     <br>

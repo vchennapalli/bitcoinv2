@@ -201,6 +201,7 @@ channel.on('mining', msg => {
 
           //updating bitcoins transacted
           bitcoins_transacted = bitcoins_transacted+transVal
+          bitcoins_transacted = Math.floor(bitcoins_transacted * 10000) / 10000
           document.getElementById("bitcoins_transacted").innerHTML = bitcoins_transacted
         }
       }
@@ -273,7 +274,7 @@ channel.on('mining', msg => {
      type: 'line',
       data: {
         labels: blockNumList,
-        text: "Nunber of blocks",
+        text: "Number of blocks",
         datasets: [{ 
             data: transCountList,
             label: "Number of transactions",
