@@ -155,8 +155,14 @@ defmodule Block do
         :timestamp => DateTime.utc_now(),
         :previous_block_hash => pbh
       })
-
+      
+      start_time = :os.system_time(:micro_seconds)
       nonce = M.mine(header)
+      end_time = :os.system_time(:micro_seconds)
+      
+      Bitcoinv2Web.Endpoint.broadcast "miningChannel:","mining:time",%{
+        time: end_time - start_time
+      }
       # hash = "#{header[:version]}#{header[:previous_block_hash]}#{header[:merkle_root]}#{header[:timestamp]}#{header[:nonce]}" |> H.double_hash(:sha256) |> Base.encode16
       # IO.inspect hash
       my_address = get_in(state, [:wallet, :public_address])

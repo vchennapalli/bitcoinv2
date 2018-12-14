@@ -27,6 +27,7 @@ defmodule User do
   def init(args) do
     Process.send_after(self(), :initiate_transaction, @first_tx_after)
     Process.send_after(self(), :create_block, @create_second_block_after)
+    :timer.start
     {:ok, args}
   end
 
@@ -67,6 +68,8 @@ defmodule User do
         state
       mempool_size >= 4 ->
         state = B.create(state)
+        start_time = :os.system_time(:micro_seconds)
+        state = Map.put(state, :mining_begin_time, start_time)
         Process.send(self(), :mine_block, [])
         state
       true ->
@@ -101,6 +104,13 @@ defmodule User do
       {is_pow_valid, state} = M.check_proof_of_work(state)
       new_state = 
       if is_pow_valid do
+        end_time = :os.system_time(:micro_seconds)
+        start_time = state[:mining_begin_time]
+
+        Bitcoinv2Web.Endpoint.broadcast "miningChannel:","mining:time",%{
+          time: end_time - start_time
+        }
+
         {new_state, block, height} = B.add_to_blockchain(state)
         new_state = Map.put(new_state, :continue_mining, false)
         agent_pid = Map.get(new_state, :agent_pid)

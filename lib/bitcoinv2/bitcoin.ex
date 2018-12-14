@@ -96,7 +96,8 @@ defmodule Bitcoin do
               :max_blocks => max_blocks,
               :in_progress_block => %{},
               :continue_mining => false,
-              :blockhash => []
+              :blockhash => [],
+              :mining_begin_time => 0
             }]
           }
         }
