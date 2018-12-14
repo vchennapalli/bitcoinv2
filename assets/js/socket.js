@@ -264,7 +264,7 @@ channel.on('mining', msg => {
       options: {
         title: {
           display: true,
-          text: 'Nonce after Each Block'
+          text: 'Nonce for Each Block'
         },
         responsive:true,
       }
